@@ -65,26 +65,6 @@ void setup() {
   servo_left2.write(0);
 }
 
-int x;
-int y;
-int pot_v;
-int pot_v_high;
-int pot_v_low;
-
 void loop() {
-  x = analogRead(VRX_PIN);
-  y = analogRead(VRY_PIN);
- 
-  x = map(x, 0, 4096, 0, 90);
-  y = map(y, 0, 4096, 90, 10);
-  servoX.write(x);
-  servoY.write(y);
- 
-  pot_v = analogRead(POT);
-  pot_v_high = map(pot_v, 0, 4096, 0, 45);
-  pot_v_low = map(pot_v, 0, 4096, 45, 0); 
-  servo_right1.write(pot_v_high);
-  servo_right2.write(pot_v_low);
-  servo_left1.write(pot_v_low);
-  servo_left2.write(pot_v_high);
+  // empty, all handled by the callback
 }
