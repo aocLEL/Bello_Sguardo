@@ -2,19 +2,13 @@
 // MAC usb-c(master):    E4:65:B8:1B:37:C8
 #include <WiFi.h>
 #include <esp_now.h>
+#include "../../Common/data.h"
 
 #define JOYX_PIN 4
 #define JOYY_PIN 5
 #define POT_PIN  6
 
 const uint8_t reciver_mac_addr[] = {0x08, 0xD1, 0xF9, 0x27, 0xC3, 0x04};
-
-// structure of sending datas
-typedef struct _datas {
-  int x;
-  int y;
-  int p_val;
-} ControllerData;
 
 // peer
 esp_now_peer_info_t peer;
@@ -44,7 +38,7 @@ void setup(){
   }
 }
 
-ControllerData data; 
+BSData data; 
 unsigned int prev_time = 0;
 
 void loop(){
@@ -52,7 +46,7 @@ void loop(){
     data.x = analogRead(JOYX_PIN);
     data.y = analogRead(JOYY_PIN);
     data.p_val = analogRead(POT_PIN);
-    esp_now_send(reciver_mac_addr, (uint8_t*)&data, sizeof(ControllerData));
+    esp_now_send(reciver_mac_addr, (uint8_t*)&data, sizeof(BSData));
     prev_time = millis();
   }
 }

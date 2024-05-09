@@ -1,6 +1,7 @@
 #include <WiFi.h>
 #include <esp_now.h>
 #include <ESP32Servo.h>
+#include "../../Common/data.h"
 
 #define SM_X 12
 #define SM_Y 14
@@ -16,17 +17,11 @@ Servo servo_right2;
 Servo servo_left1;
 Servo servo_left2;
 
-typedef struct _datas {
-  int x;
-  int y;
-  int p_val;
-} ControllerData;
 
-
-ControllerData data;
+BSData data;
 
 void on_recv(const uint8_t *mac, const uint8_t *in_data, int len) {
-  memcpy(&data, in_data, sizeof(ControllerData));
+  memcpy(&data, in_data, sizeof(BSData));
   Serial.printf("X --> %d | Y --> %d | P_VAL --> %d\n", data.x, data.y, data.p_val);
   // mapping and applying x/y servo datas
   int x = map(data.x, 0, 4096, 0, 60);
