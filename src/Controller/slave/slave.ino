@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include <esp_now.h>
 #include <ESP32Servo.h>
-#include "../../Common/data.h"
+#include "Common/data.h"
 
 #define SM_X 12
 #define SM_Y 14

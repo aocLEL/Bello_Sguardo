@@ -1,7 +1,7 @@
 #ifndef __SECRETS__
     #define __SECRETS__
-    const char *wifi_ssid = "--SSID--";
-    const char *wifi_password = "--PASSWORD--";
+    const char *wifi_ssid = "--WIFI-SSID--";
+    const char *wifi_password = "--WIFI-PASSWORD--";
 #endif
 
 

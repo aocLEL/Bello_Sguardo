@@ -1,14 +1,14 @@
-// MAC micro-usb(slave): 08:D1:F9:27:C3:04
-// MAC usb-c(master):    E4:65:B8:1B:37:C8
+// MAC micro-usb(master): 08:D1:F9:27:C3:04
+// MAC usb-c(slave):    E4:65:B8:1B:37:C8
 #include <WiFi.h>
 #include <esp_now.h>
-#include "../../Common/data.h"
+#include "Common/data.h"
 
 #define JOYX_PIN 4
 #define JOYY_PIN 5
 #define POT_PIN  6
 
-const uint8_t reciver_mac_addr[] = {0x08, 0xD1, 0xF9, 0x27, 0xC3, 0x04};
+const uint8_t reciver_mac_addr[] = {0xE4, 0x65, 0xB8, 0x1B, 0x37, 0xC8};
 
 // peer
 esp_now_peer_info_t peer;

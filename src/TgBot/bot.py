@@ -3,13 +3,16 @@ from pyrogram.types import *
 from pyromod import listen
 import asyncio
 import requests
+import shutil
+import os
 
 
 
 # Google AppScript deployment ID
-GS_ID = "--APPSCRIPT-DEVID--" 
+GS_ID = "--GS-ID--"
+cam_ip = "--BOT-CAMERA-IP--"
 
-api_id = 0000000 # -- API-ID --
+api_id = 0000000
 api_hash = "--API-HASH--"
 token = "--BOT-TOKEN--"
 bot = Client("bellosguardo_bot", api_id=api_id, api_hash=api_hash, bot_token=token)
@@ -70,11 +73,28 @@ async def get_start(client, query):
     await start(client, query.message)
     await query.answer()
 
-@bot.on_callback_query(filters.regex("capture_cb"))
-async def capture_image(client, query):
-    await bot.send_message(query.message.chat.id, "Capture link")
+
+@bot.on_callback_query(filters.regex("info_cb"))
+async def get_info(client, query):
+    await bot.send_message(query.message.chat.id, "@Bello_Sguardo_bot è un semplice bot telegram che ti consente di interagire con BelloSguardo, Il progetto presentato allo SchoolMakerDay dall'istituto ISIT Bassi-Burgatti(Cento FE), da questo bot è possibile scattare immagini in tempo reale di ciò che BelloSguardo vede e modificare/visualizzare le sue coordinate di movimento, per capire meglio il funzionamento di questo bot e del resto del progetto, vai al [sito ufficiale di BelloSguardo](http://lab.isit100.fe.it:8085)")
     await start(client, query.message)
     await query.answer()
+
+
+
+@bot.on_callback_query(filters.regex("capture_cb"))
+async def capture_image(client, query):
+    img = requests.get(f"http://{cam_ip}/capture", stream=True)
+    if img.status_code == 200:
+        with open("botimg.jpg",'wb') as f:
+            shutil.copyfileobj(img.raw, f)
+        await bot.send_photo(query.message.chat.id, "botimg.jpg") 
+        os.remove("botimg.jpg")
+    else:
+        await bot.send_message(query.message.chat.id, "Impossibile recuperare l'immagine")
+    await start(client, query.message)
+    await query.answer()
+
 
 @bot.on_callback_query(filters.regex("controls_cb"))
 async def controls_handler(client, query):

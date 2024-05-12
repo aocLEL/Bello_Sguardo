@@ -1,8 +1,11 @@
 #include "esp_camera.h"
 #include <WiFi.h>
 #include "camera_pins.h"
-#include "/home/aoclel/Desktop/Projects/Bello_Sguardo/Bello_Sguardo/src/Common/secrets.h"
-#include "/home/aoclel/Desktop/Projects/Bello_Sguardo/Bello_Sguardo/src/Common/data.h"
+#include "Common/secrets.h"
+#include "Common/data.h"
+
+// comment this define declaration for the bot cam code
+#define CAM_EYE
 
 #define CAMERA_MODEL_AI_THINKER
 #define DATA_BLEN 12
@@ -42,12 +45,14 @@ void setup() {
 BSData cam_data;
 
 void loop() {
-  if(Serial.available() >= DATA_BLEN) {
-    if(Serial.readBytes((char*)&cam_data, sizeof(BSData)) == sizeof(BSData)) {
-      Serial.printf("X --> %d | Y --> %d | P_VAL --> %d\n", cam_data.x, cam_data.y, cam_data.p_val);
-      ledcWrite(2, 255);
-      delay(400);
-      ledcWrite(2, 0);
+  #ifdef CAM_EYE
+    if(Serial.available() >= DATA_BLEN) {
+      if(Serial.readBytes((char*)&cam_data, sizeof(BSData)) == sizeof(BSData)) {
+        Serial.printf("X --> %d | Y --> %d | P_VAL --> %d\n", cam_data.x, cam_data.y, cam_data.p_val);
+        ledcWrite(2, 255);
+        delay(400);
+        ledcWrite(2, 0);
+      }
     }
-  }
+  #endif
 }

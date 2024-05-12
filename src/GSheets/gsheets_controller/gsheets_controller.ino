@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include "../Common/secrets.h"
+#include "Common/secrets.h"
 
 typedef int value_t;
 
