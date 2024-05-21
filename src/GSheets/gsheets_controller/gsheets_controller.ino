@@ -1,18 +1,18 @@
 #include <ArduinoJson.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <HardwareSerial.h>
 #include "Common/secrets.h"
+#include "Common/data.h"
 
-typedef int value_t;
-
-String GS_ID = "---DEPLOYMENT-ID---";
+String GS_ID = "--DEPLOYMENT-ID--";
 
 const char* host = "script.google.com"; 
 
-value_t x = 0;  //  LEFT/RIGHT
-value_t y = 0;  //  UP/DOWN
-value_t z = 0;  //  OPEN/CLOSE
+BSData data;
+HardwareSerial SerialPort(2);
 String payload = "";
+String prev_p = "";
 
 unsigned long time_ms;
 unsigned long last_read;
@@ -22,6 +22,8 @@ unsigned long time_dif;
 
 void setup(){
   Serial.begin(115200);
+  SerialPort.begin(115200);
+  data.device = GSHEET;
   setup_wifi();
 }
 
@@ -71,10 +73,14 @@ void read_sheet(){
 
 void tokenize_payload(){
   String buffer = payload;
-  JsonDocument doc;
-  deserializeJson(doc, buffer);
-  x = doc[0][0];
-  y = doc[1][0];
-  z = doc[2][0];
-  Serial.printf("X --> %d Y --> %d Z --> %d\n", x, y, z);
+  if(buffer != prev_p) {
+    JsonDocument doc;
+    deserializeJson(doc, buffer);
+    data.x = doc[0][0];
+    data.y = doc[1][0];
+    data.p_val = doc[2][0];
+    SerialPort.write((const char*)&data, sizeof(BSData));
+    Serial.printf("X --> %d Y --> %d Z --> %d\n", data.x, data.y, data.p_val);
+  }
+  prev_p = buffer;
 }
