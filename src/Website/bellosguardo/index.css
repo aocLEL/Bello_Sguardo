@@ -1,0 +1,64 @@
+body > main {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 300px;
+    height: 300px;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 30px;
+    transition: ease-in 0.5s;
+    box-shadow: 10px 10px 12px black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.card:hover {
+    padding: 3rem;
+}
+
+.card > h2 {
+    color: white;
+    font-size: 35px;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+
+    body > main {
+        animation: none;
+        transition: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .card {
+        width: 90%;
+        padding: 0;
+        transition: none;
+        animation: none;
+        gap: 0.5rem;
+    }
+    .card:hover {
+        padding: 0;
+    }
+    card h2{
+        font-size: 30px;
+    }
+}

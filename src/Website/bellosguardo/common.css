@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-image: url("./public/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+body > header {
+    background-color: rgba(67, 21, 141, 0.575);
+    width: 100%;
+}
+
+.header-nav {
+    width: 90%;
+    margin: auto;
+    transition: ease-in-out 0.5s;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-nav > * {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.header-nav .logo {
+    background-image: url("./public/logo.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 30vh;
+    width: 400px;
+    margin: 40px;
+}
+
+.header-nav > section:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-nav > section:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 2.5rem;
+}
+
+.header-nav > section:last-child > a {
+    text-decoration: none;
+    color: black;
+    padding: 1.5rem;
+    vertical-align: center;
+    transition: ease-in 0.5s;
+    font-weight: 600;
+    color: white;
+}
+
+.header-nav > section:last-child > a > p {
+    margin: 0;
+}
+
+.header-nav > section:last-child > a:hover {
+    background-color: rgba(46, 22, 112, 0.795);
+    border-radius: 20px;
+    transition: ease-in 0.5s;
+    font-weight: 600;
+}
+
+.github_logo{
+    width: 50px;
+    max-height: 50px;
+}
+
+body > footer {
+    background-color: rgb(67, 21, 141);
+    margin-top: 50px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    transition: ease-in 0.5s;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    gap: 1.5rem;
+}
+
+.container > div > p {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.team-info > ul {
+    list-style: circle;
+}
+
+.team-info > ul > a {
+    text-decoration: none;
+    color: white;
+}
+
+.team-info > ul > li {
+    color: white;
+}
+
+#group-img {
+    flex-grow: 2;
+    background-image: url("./public/team_image.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 30vh;
+    width: 400px;
+}
+
+.sponsor-logo {
+    flex-grow: 1;
+    background-image: url("./public/team_image.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 200px;
+    width: 200px;
+}
+
+@media screen and (max-width: 1300px)  {
+    .header-nav > section:last-child {
+        margin-bottom: 30px;
+    }
+
+    .header-nav {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body > header {
+        justify-content: center;
+        align-items: center;
+        animation: none;
+    }
+
+    .header-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        animation: none;
+    }
+
+    .header-nav  .logo {
+        width: 300px;
+    }
+
+    .header-nav > section:last-child {
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        animation: none;
+    }
+
+    .header-nav > section:last-child > * {
+        margin: auto;
+        width: 90%;
+        text-align: center;
+    }
+    .header-nav > section:last-child > a {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    body > footer {
+        animation: none;
+    }
+
+    .container {
+        width: 100%;
+    }
+    .team_container {
+        width: 100%;
+    }
+    #group-img {
+        width: 95%;
+    }
+}
+
