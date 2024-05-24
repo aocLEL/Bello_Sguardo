@@ -57,19 +57,38 @@ void move(BSData *data) {
     servo_y.write(data->y);
     servo_l1.write(pot_v_high);
     servo_l2.write(pot_v_low);
+    servo_r1.write(pot_v_low);
+    servo_r2.write(pot_v_high);
+}
+
+
+void auto_move(BSData *data) {
+    data->x = map(data->x, 0, 1150, 90, prev_map);
+    servo_x.write(data->x);
 }
 
 void loop() {
   //Controller
   if(SerialPort.available() >= sizeof(BSData)) {
     SerialPort.readBytes((char*)&data, sizeof(BSData));
-    Serial.printf("from: %d | X --> %d | Y --> %d | POT --> %d\n", data.device, data.x, data.y, data.p_val);
-    move(&data);
+    if(data.device >= 0 && data.device < 3) {
+      if(data.device == 0 && data.p_val == 4095) {
+        auto_move(&data);
+        Serial.printf("from: %d | X --> %d | Y --> %d | POT --> %d\n", data.device, data.x, data.y, data.p_val);
+      }
+      else if(data.device != 0) {
+        Serial.printf("from: %d | X --> %d | Y --> %d | POT --> %d\n", data.device, data.x, data.y, data.p_val);
+        move(&data);
+      }
+        
+    }
   }
   //GSheet
   if(SerialPort2.available() >= sizeof(BSData)) {
-    SerialPort2.readBytes((char*)&data, sizeof(BSData));
-    Serial.printf("from: %d | X --> %d | Y --> %d | POT --> %d\n", data.device, data.x, data.y, data.p_val);
-    move(&data);
+    if(data.device >= 0 && data.device < 3) {
+      SerialPort2.readBytes((char*)&data, sizeof(BSData));
+      Serial.printf("from: %d | X --> %d | Y --> %d | POT --> %d\n", data.device, data.x, data.y, data.p_val);
+      move(&data);
+    }
   } 
 }

@@ -13,12 +13,13 @@ try:
     cam_port = input("Enter cam port: ")
     ser = serial.Serial(cam_port, 115200, dsrdtr=None)
 except:
-    print("Serial port not found!!")
+    print("Serial port not found or busy!!")
     exit()
 ser.setRTS(False)
 ser.setDTR(False)
 
 cv2.namedWindow("ESP32-Cam Face-Recognition", cv2.WINDOW_AUTOSIZE)
+raw_data = pack('iiii', 2000, 2000, 4095, 0)
 while True:
     try:
         img_resp=urllib.request.urlopen(url)
@@ -34,13 +35,14 @@ while True:
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = img[y:y+h, x:x+w]
         # creating raw data bytes
-        raw_data = pack("iii", x, y, -1)
+        raw_data = pack("iiii", x, y, 4095, 0)
         try:
             ser.write(raw_data)
         except:
             print("Error while writing on serial port!!")
             exit()
         print(f"Sent x = {x}, y = {y}")
+    ser.write(raw_data)
     cv2.imshow("live transmission",img)
     key=cv2.waitKey(5)
     if key==ord('q'):

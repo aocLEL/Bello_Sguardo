@@ -9,12 +9,12 @@ import os
 
 
 # Google AppScript deployment ID
-GS_ID = "--GS-ID--"
-cam_ip = "--BOT-CAMERA-IP--"
+GS_ID = "AKfycbyLoQ22vC7W3VmeW1Pdw28oWvwKoUl9eVtKvxNqxC-rqQpHmPLYagY1faW76-IaiaTu"
+cam_ip = "192.168.90.4"
 
-api_id = 0000000
-api_hash = "--API-HASH--"
-token = "--BOT-TOKEN--"
+api_id = 2815879
+api_hash = "53db8b2b2b8bd08854d1ce4b62a47c8a"
+token = "7087122242:AAHoL5kerAIBorBSkrU4A6Z8NN5iWUT-a6c"
 bot = Client("bellosguardo_bot", api_id=api_id, api_hash=api_hash, bot_token=token)
 
 #keyboards

@@ -5,7 +5,7 @@
 #include "Common/secrets.h"
 #include "Common/data.h"
 
-String GS_ID = "--DEPLOYMENT-ID--";
+String GS_ID = "AKfycbyLoQ22vC7W3VmeW1Pdw28oWvwKoUl9eVtKvxNqxC-rqQpHmPLYagY1faW76-IaiaTu";
 
 const char* host = "script.google.com"; 
 
@@ -31,7 +31,7 @@ void setup(){
 void loop(){
   time_ms = millis();
   time_dif = time_ms - last_read;
-  if(time_dif >= 15000){  // 15 sec
+  if(time_dif >= 1500){  // 15 sec
     last_read = time_ms;
     read_sheet();
     tokenize_payload();
@@ -74,6 +74,7 @@ void read_sheet(){
 void tokenize_payload(){
   String buffer = payload;
   if(buffer != prev_p) {
+    Serial.println("Different");
     JsonDocument doc;
     deserializeJson(doc, buffer);
     data.x = doc[0][0];
