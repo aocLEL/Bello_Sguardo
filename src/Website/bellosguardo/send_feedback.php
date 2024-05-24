@@ -20,34 +20,7 @@
    $stmt->bindValue(':feed_mark', $feed_mark);
    $stmt->execute();
    echo "New record created successfully";
-   //  $conn = new mysqli($hostdb, $userdb, $passdb, $dbname);
-   //  // Check connection
-   //  if ($conn->connect_error) {
-   //     echo "Connection failed: " . $conn->connect_error;
-   //     die();
-   //  } else {
-   //      echo "Connection ok";
-   //  }
-    
-    /**********************************************
-    *
-    *  ATTENZIONE: prima di eseguire insert bisogna fare
-    *  dei controlli sull'input, togliendo ad esempio eventuali caratteri speciali
-    *  che possono provocare SQL Injection. 
-    *  Così com'è il sito è molto a rischio
-    *
-    *  TO DO
-    ***********************************************/
-    
-   //  if ($conn->query($sql) === TRUE) {
-   //     echo "New record created successfully";
-   //  } else {
-   //     echo "Error: " . $sql . "<br>" . $conn->error;
-   //     die();
-   //  }
-    
-   //  $conn->close();
-    header("Location: ./feedback.php");
-    die()   ; 
+   header("Location: ./feedback.php");
+   die(); 
 ?>
 
